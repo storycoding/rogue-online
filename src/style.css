@@ -1,0 +1,50 @@
+body {
+    background-color: black;
+  }
+
+  .f {
+    background: url(./assets/tiles1.png) -100px 200px;
+  }
+
+  .w {
+    background: url(./assets/tiles1.png) 0px 300px;
+  }
+
+  .d {
+    background: url(./assets/tiles1.png) 1100px 0px;
+  }
+
+  #container {
+    position: relative;
+    height: 500px;
+    width: 500px;
+    display: grid;
+    grid-gap: 1px;
+    grid-template-columns: repeat(5, 20%);
+    grid-template-rows: repeat(5, 20%);
+  }
+
+  .item {
+    z-index: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: 1600%;
+    image-rendering: pixelated;
+  }
+
+  @keyframes walk {
+   100% { background-position: -462px; }
+  }
+  
+  #sprite {
+    z-index: 2;
+    position: absolute;
+    background-color: transparent;
+    height: 100px;
+    width: 100px;
+    background: url(./assets/thief.png) 0px 0px;
+    background-size: 1200%;
+    image-rendering: pixelated;
+    animation: walk 0.5s steps(5) infinite;
+  }
