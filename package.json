@@ -27,6 +27,6 @@
   "scripts": {
     "dev": "webpack-dev-server",
     "build": "webpack",
-    "start": "npm run build && node server"
+    "start": "node server"
   }
 }
