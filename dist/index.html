@@ -5,6 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>RLC online</title>
+  <script>
+    var ws = new WebSocket('ws://localhost:3000');
+    // event emmited when connected
+    ws.onopen = function () {
+        console.log('websocket is connected ...')
+        // sending a send event to websocket server
+        ws.send('hello, server!');
+    }
+    // event emmited when receiving message 
+    ws.onmessage = function (res) {
+        console.log(res.data);
+    }
+  </script>
 </head>
 <body>
   <div id="root"></div>
