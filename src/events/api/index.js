@@ -15,15 +15,12 @@ const postDirection = async (direction) => {
     }
   })
   const response = await res.json();
-  console.log('Success:', JSON.stringify(response)); // remove this
-
 };
 
 const getGameState = async () => {
   const url = "/game";
   const res = await fetch(url);
   const newState = await res.json();
-  console.log(newState);
   return newState;
 }
 

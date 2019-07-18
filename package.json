@@ -5,7 +5,6 @@
   "author": "storycoding",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "latest",
     "express": "latest",
     "body-parser": "latest",
     "react": "^16.8.6",
@@ -28,6 +27,6 @@
   "scripts": {
     "dev": "webpack-dev-server",
     "build": "webpack",
-    "start": "npm run build && node app.js"
+    "start": "npm run build && node server"
   }
 }
