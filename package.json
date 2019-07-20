@@ -5,10 +5,13 @@
   "author": "storycoding",
   "license": "ISC",
   "dependencies": {
-    "express": "latest",
     "body-parser": "latest",
+    "express": "latest",
+    "http": "0.0.0",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "uuid": "^3.3.2",
+    "ws": "^7.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
@@ -25,7 +28,7 @@
     "webpack-dev-server": "^3.7.1"
   },
   "scripts": {
-    "dev": "webpack-dev-server",
+    "dev": "npm run build && nodemon server",
     "build": "webpack",
     "start": "node server"
   }

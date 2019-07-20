@@ -1,24 +1,21 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const http = require('http');
+const setSockets = require('./sockets/set-sockets');
+
+const port = process.env.PORT || 3000;
+
 const startServer = () => {
-  var express = require('express');
-    var bodyParser = require('body-parser');
-
-    const gameRouter = require('./routes/game');
-    const indexRouter = require('./routes/index');
-    const moveRouter = require('./routes/move');
-
     const app = express();
+    const server = http.createServer(app);
 
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(express.static('dist'));
+  
+    // web socket server
+    setSockets(server);
 
-    // api routes
-    app.use('/game', gameRouter);
-    app.use('/move', moveRouter);
-    app.use('/', indexRouter);
-
-    const port = process.env.PORT || 3000;
-
-    app.listen(port, () => console.log(`Server running at http://127.0.0.1:${port}/`));
+    server.listen(port, () => console.log(`Server running at http://127.0.0.1:${port}/`));
 }
 
 module.exports = startServer;
