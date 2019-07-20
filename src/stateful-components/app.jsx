@@ -1,35 +1,40 @@
 import React, { Component } from "react";
 import Block from "../functional-components/Block.jsx";
 import checkDirection from "../events/check-direction";
-import api from "../events/api";
+
+const port = process.env.PORT || 3000;
+const client = new WebSocket(`ws://localhost:${port}`);
 
 class App extends Component {
   constructor() {
     super();
     this.state = {};
-
     this.keyPress = this.keyPress.bind(this);
-    this.refresh = this.refresh.bind(this);
   }
 
-  async keyPress({keyCode}){
+  keyPress({keyCode}) {
     let direction = checkDirection(keyCode);
-    await api.postDirection(direction);
-    this.refresh();
-  }
-
-  async refresh() {
-    const newState = await api.getGameState();
-    if(JSON.stringify(this.state) !== JSON.stringify(newState)) {
-      this.setState(newState); // could be a problem if return type is invalid
+    if (direction) {
+      client.send(direction);
     }
   }
 
-  componentDidMount() {
-    this.refresh();
-    setInterval( () => {
-      this.refresh();
-    }, 1000);
+  componentWillMount() {
+    client.onopen = () => {
+        console.log('connected to the server websocket');
+        client.send('request-game-state');
+    }
+    
+    client.onmessage = (res) => {
+        if(res.data[0] === "{") {
+          const newState = JSON.parse(res.data);
+          this.setState(newState);
+        }
+    }
+
+    client.onclose = () => {
+      alert('disconnected from the server websocket');
+    }
   }
 
   render() {
