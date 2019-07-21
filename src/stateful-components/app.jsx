@@ -33,7 +33,7 @@ class App extends Component {
     }
 
     client.onclose = () => {
-      alert('disconnected from the server websocket');
+      console.log('disconnected from the server websocket');
     }
   }
 
@@ -41,12 +41,27 @@ class App extends Component {
     if(!this.state.grid) {
       return <div className="loading">Loading...</div>
     }
+
     const heroStyle = {
       gridColumn: `${this.state.hero.c+1}`,
       gridRow: `${this.state.hero.r+1}`,
     };
+
+    const h = this.state.grid.length;
+    const w = this.state.grid[0].length;
+
+    const containerStyle = {
+      position: "relative",
+      height: `${h}00px`,
+      width: `${w}00px`,
+      display: "grid",
+      gridTemplateRows: `repeat(${h}, ${100/h}%)`,
+      gridTemplateColumns: `repeat(${w}, ${100/w}%)`,
+      zoom: "0.5",
+    };
+
     return (
-      <div id="container" onKeyDown={this.keyPress} tabIndex="0">
+      <div id="container" style={containerStyle} onKeyDown={this.keyPress} tabIndex="0">
         <div id="sprite" style={heroStyle}></div>
         {this.state.grid.map( (row, rIndex) => {
           return row.map( (cell, cIndex) => (

@@ -14,16 +14,6 @@ body {
     background: url(./assets/tiles1.png) 1100px 0px;
   }
 
-  #container {
-    position: relative;
-    height: 500px;
-    width: 500px;
-    display: grid;
-    grid-gap: 1px;
-    grid-template-columns: repeat(5, 20%);
-    grid-template-rows: repeat(5, 20%);
-  }
-
   .item {
     z-index: 0;
     display: flex;
