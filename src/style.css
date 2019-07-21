@@ -1,40 +1,46 @@
 body {
-    background-color: black;
-  }
+  background-color: black;
+}
 
-  .f {
-    background: url(./assets/tiles1.png) -100px 200px;
-  }
+.f {
+  background: url(./assets/tiles1.png) -100px 200px;
+}
 
-  .w {
-    background: url(./assets/tiles1.png) 0px 300px;
-  }
+.w {
+  background: url(./assets/tiles1.png) 0px 300px;
+}
 
-  .d {
-    background: url(./assets/tiles1.png) 1100px 0px;
-  }
+.d {
+  background: url(./assets/tiles1.png) 1100px 0px;
+}
 
-  .item {
-    z-index: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-size: 1600%;
-    image-rendering: pixelated;
-  }
+.item {
+  z-index: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: 1600%;
+  image-rendering: pixelated;
+}
 
-  @keyframes walk {
-   100% { background-position: -462px; }
-  }
-  
-  #sprite {
-    z-index: 2;
-    position: absolute;
-    background-color: transparent;
-    height: 100px;
-    width: 100px;
-    background: url(./assets/thief.png) 0px 0px;
-    background-size: 1200%;
-    image-rendering: pixelated;
-    animation: walk 0.5s steps(5) infinite;
-  }
+@keyframes walk {
+  100% { background-position: -462px; }
+}
+
+.sprite {
+  z-index: 2;
+  position: absolute;
+  background-color: transparent;
+  height: 100px;
+  width: 100px;
+  background: url(./assets/thief.png) 0px 0px;
+  background-size: 1200%;
+  image-rendering: pixelated;
+  animation: walk 0.5s steps(5) infinite;
+}
+
+#container {
+  position: relative;
+  display: grid;
+  zoom: 0.5;
+}

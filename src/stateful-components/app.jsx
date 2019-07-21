@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import Block from "../functional-components/Block.jsx";
+import Blocks from "../functional-components/Blocks.jsx";
+import Players from "../functional-components/Players.jsx";
+
 import checkDirection from "../events/check-direction";
 
 const port = process.env.PORT || 3000;
@@ -8,7 +10,9 @@ const client = new WebSocket(`ws://localhost:${port}`);
 class App extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      players: {}
+    };
     this.keyPress = this.keyPress.bind(this);
   }
 
@@ -42,38 +46,20 @@ class App extends Component {
       return <div className="loading">Loading...</div>
     }
 
-    const heroStyle = {
-      gridColumn: `${this.state.hero.c+1}`,
-      gridRow: `${this.state.hero.r+1}`,
-    };
+    const height = this.state.grid.length;
+    const width = this.state.grid[0].length;
 
-    const h = this.state.grid.length;
-    const w = this.state.grid[0].length;
-
-    const containerStyle = {
-      position: "relative",
-      height: `${h}00px`,
-      width: `${w}00px`,
-      display: "grid",
-      gridTemplateRows: `repeat(${h}, ${100/h}%)`,
-      gridTemplateColumns: `repeat(${w}, ${100/w}%)`,
-      zoom: "0.5",
+    const containerStyle = {     
+      height: `${height}00px`,
+      width: `${width}00px`,
+      gridTemplateRows: `repeat(${height}, ${100/height}%)`,
+      gridTemplateColumns: `repeat(${width}, ${100/width}%)`,
     };
 
     return (
       <div id="container" style={containerStyle} onKeyDown={this.keyPress} tabIndex="0">
-        <div id="sprite" style={heroStyle}></div>
-        {this.state.grid.map( (row, rIndex) => {
-          return row.map( (cell, cIndex) => (
-            <Block
-              key={`tile_${rIndex}.${cIndex}`}
-              tile={cell}
-              rIndex={rIndex}
-              cIndex={cIndex}
-            />
-          )
-          );
-        })}
+        <Players players={this.state.players}/>
+        <Blocks grid={this.state.grid}/>
       </div>
     );
   }
