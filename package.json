@@ -1,7 +1,7 @@
 {
-  "name": "rlc-client",
+  "name": "rogue-online",
   "version": "0.0.1",
-  "description": "ebs hosted rlc-online",
+  "description": "a web browser mmo",
   "author": "storycoding",
   "license": "ISC",
   "dependencies": {
