@@ -23,20 +23,53 @@ body {
   image-rendering: pixelated;
 }
 
-@keyframes walk {
-  100% { background-position: -462px; }
-}
-
 .sprite {
   z-index: 2;
   position: absolute;
-  background-color: transparent;
   height: 100px;
   width: 100px;
-  background: url(./assets/thief.png) 0px 0px;
-  background-size: 1200%;
+  background-color: transparent;
   image-rendering: pixelated;
-  animation: walk 0.5s steps(5) infinite;
+}
+
+@keyframes thief-walk {
+  100% { background-position: -462px; }
+}
+
+.thief {
+  background: url(./assets/thief.png) 0px 0px;
+  animation: thief-walk 0.5s steps(5) infinite;
+  background-size: 1200%;
+}
+
+@keyframes ogre-walk {
+  100% { background-position: -300px; }
+}
+
+.ogre {
+  background: url(./assets/ogre.png) 0px 0px;
+  animation: ogre-walk 0.5s steps(3) infinite;
+  background-size: 300%;
+}
+
+@keyframes frog-walk {
+  100% { background-position: -300px; }
+}
+
+.frog {
+  background: url(./assets/frog.png) 0px 0px;
+  animation: ogre-walk 0.5s steps(3) infinite;
+  background-size: 300%;
+}
+
+@keyframes strongman-walk {
+  100% { background-position: -300px; }
+}
+
+.strongman {
+  background: url(./assets/strongman.png) 0px 0px;
+  animation: ogre-walk 0.5s steps(3) infinite;
+  background-size: 300%;
 }
 
 #container {
