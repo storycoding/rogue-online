@@ -4,8 +4,6 @@ const Players = (props) => {
   return Object.keys(props.players).map( id => {
     const player = props.players[id];
 
-    player.sprite = "frog"; // will be sourced from player data
-
     const playerStyle = {
       gridColumn: `${player.location.c+1}`,
       gridRow: `${player.location.r+1}`,

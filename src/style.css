@@ -32,16 +32,6 @@ body {
   image-rendering: pixelated;
 }
 
-@keyframes thief-walk {
-  100% { background-position: -462px; }
-}
-
-.thief {
-  background: url(./assets/thief.png) 0px 0px;
-  animation: thief-walk 0.5s steps(5) infinite;
-  background-size: 1200%;
-}
-
 @keyframes ogre-walk {
   100% { background-position: -300px; }
 }
@@ -52,12 +42,42 @@ body {
   background-size: 300%;
 }
 
+@keyframes lizzard-walk {
+  100% { background-position: -300px; }
+}
+
+.lizzard {
+  background: url(./assets/lizzard.png) 0px 0px;
+  animation: ogre-walk 0.5s steps(3) infinite;
+  background-size: 300%;
+}
+
+@keyframes behemoth-walk {
+  100% { background-position: -300px; }
+}
+
+.behemoth {
+  background: url(./assets/behemoth.png) 0px 0px;
+  animation: ogre-walk 0.5s steps(3) infinite;
+  background-size: 300%;
+}
+
 @keyframes frog-walk {
   100% { background-position: -300px; }
 }
 
 .frog {
   background: url(./assets/frog.png) 0px 0px;
+  animation: ogre-walk 0.5s steps(3) infinite;
+  background-size: 300%;
+}
+
+@keyframes llama-walk {
+  100% { background-position: -300px; }
+}
+
+.llama {
+  background: url(./assets/llama.png) 0px 0px;
   animation: ogre-walk 0.5s steps(3) infinite;
   background-size: 300%;
 }
