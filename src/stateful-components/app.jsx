@@ -1,42 +1,30 @@
 import React, { Component } from "react";
+import openSocket from 'socket.io-client';
+
 import Blocks from "../functional-components/Blocks.jsx";
 import Players from "../functional-components/Players.jsx";
 
-import inputKeys from '../static/input-keys';
+import inputKeys from "../static/input-keys";
+import subscribeToSocketIo from "../api/subscribe-to-socket-io";
 
 const port = process.env.PORT || 3000;
-const client = new WebSocket(`ws://localhost:${port}`);
+const client = openSocket();
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      players: {}
+      players: {},
     };
+
+    subscribeToSocketIo(client, this);
+
     this.keyPress = this.keyPress.bind(this);
   }
 
   keyPress({key}) {
     if (inputKeys.includes(key)) {
-      client.send(key);
-    }
-  }
-
-  componentWillMount() {
-    client.onopen = () => {
-        console.log('connected to the server websocket');
-        client.send('request-game-state');
-    }
-    
-    client.onmessage = (res) => {
-        if(res.data[0] === "{") {
-          const newState = JSON.parse(res.data);
-          this.setState(newState);
-        }
-    }
-
-    client.onclose = () => {
-      console.log('disconnected from the server websocket');
+      client.emit("key-input", key);
     }
   }
 
