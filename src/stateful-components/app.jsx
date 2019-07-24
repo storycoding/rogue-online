@@ -28,6 +28,10 @@ class App extends Component {
     }
   }
 
+  componentDidMount() {
+    document.addEventListener("keydown", this.keyPress);
+  }
+
   render() {
     if(!this.state.grid) {
       return <div className="loading">Loading...</div>
@@ -44,7 +48,7 @@ class App extends Component {
     };
 
     return (
-      <div id="container" style={containerStyle} onKeyDown={this.keyPress} tabIndex="0">
+      <div id="container" style={containerStyle} tabIndex="0">
         <Players players={this.state.players}/>
         <Blocks grid={this.state.grid}/>
       </div>
