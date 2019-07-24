@@ -1,6 +1,9 @@
 # rogue-online
 This game is being developed live at [twitch.tv/storycoder](https://www.twitch.tv/storycoder). The viewers will be able to play the game while it's being developed, and make suggestions / test new features as they are created :tada:
 
+## Try it out ✨
+[www.rogue-online.com](www.rogue-online.com)
+
 ## Planned features :crystal_ball:
 - Players should be able to voice chat with each other based on proximity in the map
 - Quest givers should be acted out by real people
