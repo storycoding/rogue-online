@@ -5,11 +5,18 @@ let gameState = require('../static/new-game-state');
 const findNextPosition = require('../events/find-next-position');
 const checkCollision = require('../events/check-collision');
 
+const sprites = ["ogre", "behemoth", "lizzard", "frog", "llama", "strongman"];
+let spriteIndex = -1;
 
 const setSockets = server => {
   const io = socketIo(server);
   
     io.on('connection', socket => {
+      spriteIndex ++;
+      if(spriteIndex >= sprites.length) {
+        spriteIndex = -1;
+      }
+
       console.log(`user:${socket.id} connected to the server`);
 
       // starting location
@@ -17,7 +24,8 @@ const setSockets = server => {
         location: {
           "r":1,
           "c":1,
-        }
+        },
+        sprite: sprites[spriteIndex],
       }
 
       socket.on('request-game-state', () => {
