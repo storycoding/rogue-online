@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Blocks from "../functional-components/Blocks.jsx";
 import Players from "../functional-components/Players.jsx";
 
-import checkDirection from "../events/check-direction";
+import inputKeys from '../static/input-keys';
 
 const port = process.env.PORT || 3000;
 const client = new WebSocket(`ws://localhost:${port}`);
@@ -16,10 +16,9 @@ class App extends Component {
     this.keyPress = this.keyPress.bind(this);
   }
 
-  keyPress({keyCode}) {
-    let direction = checkDirection(keyCode);
-    if (direction) {
-      client.send(direction);
+  keyPress({key}) {
+    if (inputKeys.includes(key)) {
+      client.send(key);
     }
   }
 

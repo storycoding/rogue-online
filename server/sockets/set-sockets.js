@@ -32,7 +32,12 @@ const setSockets = server => {
           return;
         }
 
-        else if(msg === "up" || msg === "down" || msg === "left" || msg === "right") {
+        else if(
+          msg === "ArrowUp" ||
+          msg === "ArrowDown" ||
+          msg === "ArrowLeft" ||
+          msg === "ArrowRight"
+          ) {
           let newPosition = findNextPosition(msg, gameState.players[id].location);
           const collides = checkCollision(newPosition, gameState.grid);
           if(!collides) {

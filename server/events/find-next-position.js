@@ -2,16 +2,16 @@ const findNextPosition = (direction, heroPosition) => {
   let newPosition = {...heroPosition};
 
   switch(direction) {
-    case "up":
+    case "ArrowUp":
       newPosition.r --;
       break;
-    case "down":
+    case "ArrowDown":
         newPosition.r ++;
       break;
-    case "left":
+    case "ArrowLeft":
         newPosition.c --;
       break;
-    case "right":
+    case "ArrowRight":
         newPosition.c ++;
       break;
     }
