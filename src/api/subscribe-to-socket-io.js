@@ -5,7 +5,6 @@ const subscribeToSocketIo = (client, app) => {
   });
 
   client.on("game-state", (data) => {
-  console.log("data retrieved from game-state", data);
   app.setState(data);
   });
 
