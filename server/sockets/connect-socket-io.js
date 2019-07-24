@@ -36,8 +36,8 @@ const setSockets = server => {
       });
 
       socket.on('disconnect', () => {
-        // use socket id from socket io instead
-        console.log(`user disconnected from the server`);
+        console.log(`user:${socket.id} disconnected from the server`);
+        delete gameState.players[socket.id];
         io.emit('game-state', gameState);
       });
     });
