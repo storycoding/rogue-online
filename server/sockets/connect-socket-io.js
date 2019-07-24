@@ -14,7 +14,7 @@ const setSockets = server => {
     io.on('connection', socket => {
       spriteIndex ++;
       if(spriteIndex >= sprites.length) {
-        spriteIndex = -1;
+        spriteIndex = 0;
       }
 
       console.log(`user:${socket.id} connected to the server`);
