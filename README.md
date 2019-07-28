@@ -16,7 +16,3 @@ This is a social experiment! Your feedback should determine the direction of thi
 
 ## Bugs :bug:
 - If you find a bug, please report it as an issue on the [github issues page](https://github.com/storycoding/rogue-online/issues)
-
-***
-## Credits
-The sprites used at this stage were sourced from Watabou's [pixel-dungeon](https://github.com/watabou/pixel-dungeon) :raised_hands:
