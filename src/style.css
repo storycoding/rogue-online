@@ -3,23 +3,23 @@ body {
 }
 
 .f {
-  background: url(./assets/tiles1.png) -100px 200px;
+  background: url(./assets/wood.png);
+  background-position-x: -100px;
 }
 
 .w {
-  background: url(./assets/tiles1.png) 0px 300px;
+  background: url(./assets/wood.png);
+  background-position-x: 0px;
 }
 
-.d {
-  background: url(./assets/tiles1.png) 1100px 0px;
+.t {
+  background: url(./assets/wood.png);
+  background-position-x: -200px;
 }
 
 .item {
   z-index: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-size: 1600%;
+  background-size: 500%;
   image-rendering: pixelated;
 }
 
@@ -37,7 +37,7 @@ body {
 }
 
 .ogre {
-  background: url(./assets/ogre.png) 0px 0px;
+  background: url(./assets/ogre.png);
   animation: ogre-walk 0.5s steps(3) infinite;
   background-size: 300%;
 }
@@ -47,7 +47,7 @@ body {
 }
 
 .lizzard {
-  background: url(./assets/lizzard.png) 0px 0px;
+  background: url(./assets/lizzard.png);
   animation: ogre-walk 0.5s steps(3) infinite;
   background-size: 300%;
 }
@@ -57,7 +57,7 @@ body {
 }
 
 .behemoth {
-  background: url(./assets/behemoth.png) 0px 0px;
+  background: url(./assets/behemoth.png);
   animation: ogre-walk 0.5s steps(3) infinite;
   background-size: 300%;
 }
@@ -67,7 +67,7 @@ body {
 }
 
 .frog {
-  background: url(./assets/frog.png) 0px 0px;
+  background: url(./assets/frog.png);
   animation: ogre-walk 0.5s steps(3) infinite;
   background-size: 300%;
 }
@@ -77,7 +77,7 @@ body {
 }
 
 .llama {
-  background: url(./assets/llama.png) 0px 0px;
+  background: url(./assets/llama.png);
   animation: ogre-walk 0.5s steps(3) infinite;
   background-size: 300%;
 }
@@ -87,12 +87,14 @@ body {
 }
 
 .strongman {
-  background: url(./assets/strongman.png) 0px 0px;
+  background: url(./assets/strongman.png);
   animation: ogre-walk 0.5s steps(3) infinite;
-  background-size: 300%;
+  background-size: 400%;
 }
 
 #container {
+  width: 640px;
+  height: 640px;
   position: relative;
   display: grid;
   zoom: 0.5;

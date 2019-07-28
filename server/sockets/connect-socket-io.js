@@ -22,8 +22,8 @@ const setSockets = server => {
       // starting location
       gameState.players[socket.id] = {
         location: {
-          "r":1,
-          "c":1,
+          "r":5,
+          "c":4,
         },
         sprite: sprites[spriteIndex],
       }
