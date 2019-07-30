@@ -26,6 +26,7 @@ const setSockets = server => {
           "c":4,
         },
         sprite: sprites[spriteIndex],
+        id: socket.id,
       }
 
       socket.on('request-game-state', () => {
@@ -33,7 +34,6 @@ const setSockets = server => {
       });
       
       socket.on('key-input', inputKey => {
-        console.log({inputKey});
         let newPosition = findNextPosition(inputKey, gameState.players[socket.id].location);
         const collides = checkCollision(newPosition, gameState.grid);
         if(!collides) {
