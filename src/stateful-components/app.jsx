@@ -15,6 +15,10 @@ class App extends Component {
     super();
     this.state = {
       players: {},
+      player: {
+        id: null,
+        div: null,
+      }
     };
 
     subscribeToSocketIo(client, this);

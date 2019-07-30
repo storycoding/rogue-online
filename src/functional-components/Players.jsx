@@ -10,7 +10,7 @@ const Players = (props) => {
     };
   
 
-    return <div className={`sprite ${player.sprite}`} key={id.slice(0,7)} style={playerStyle}></div>
+    return <div id={player.id} className={`sprite ${player.sprite}`} key={id.slice(0,7)} style={playerStyle}></div>
   });
 }
 
