@@ -2,6 +2,11 @@ body {
   background-color: black;
 }
 
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
 .f {
   background: url(./assets/wood.png);
   background-position-x: -100px;
