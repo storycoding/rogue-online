@@ -10,7 +10,7 @@ import mapTouchToKey from "../events/mapTouchToKey";
 import subscribeToSocketIo from "../api/subscribe-to-socket-io";
 
 const port = process.env.PORT || 3000;
-const client = openSocket();
+const client = openSocket(`http://127.0.0.1:${port}`);
 
 class App extends Component {
   constructor() {
