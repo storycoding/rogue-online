@@ -27,7 +27,9 @@
     "webpack-dev-server": "^3.7.1"
   },
   "scripts": {
-    "dev": "npm run build && nodemon server",
+    "dev": "npm run express:hot & npm run webpack:hot",
+    "webpack:hot": "webpack-dev-server --hotOnly",
+    "express:hot": "export DEV=true && nodemon server",
     "build": "webpack",
     "start": "node server"
   }
