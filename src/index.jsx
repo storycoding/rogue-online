@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "regenerator-runtime/runtime";
 import './style.css';
 
-import App from "./stateful-components/app.jsx";
+import App from "./components/App.jsx";
 
 ReactDOM.render(
   <App/>,

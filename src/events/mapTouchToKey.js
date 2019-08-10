@@ -1,12 +1,10 @@
-const mapTouchToKey = ({ x, y }, app) => {
+const mapTouchToKey = ({ x, y }, playerDiv) => {
     const zoom = 0.5; // zoom should be a dynamically controlled variable
     
     const tileSize = 100;
     const center = tileSize / 2;
     
     const moveThreshold = center * zoom; // how far from the center to register as a click
-
-    const playerDiv = app.state.player.div;
 
     const playerX = ( playerDiv.offsetLeft + center ) * zoom;
     const playerY = ( playerDiv.offsetTop + center ) * zoom;

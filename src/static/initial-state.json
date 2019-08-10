@@ -1,0 +1,33 @@
+{
+  "players": {
+      "234800xx44aa3g" : {
+        "location": {
+          "r":0,
+          "c":0
+        },
+        "sprite": "ogre",
+        "id": "234800xx44aa3g"
+      },
+      "945HF4898t99w1" : {
+        "location": {
+          "r":1,
+          "c":1
+        },
+        "sprite": "lizzard",
+        "id": "945HF4898t99w1"
+      }
+    },
+    "player": {
+      "location": {
+        "r":0,
+        "c":0
+      },
+      "sprite": "ogre",
+      "id": "234800xx44aa3g"
+    },
+    "grid": [
+      ["f","f"],
+      ["f","f"]
+    ]
+}
+

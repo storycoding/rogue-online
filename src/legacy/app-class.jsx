@@ -12,7 +12,7 @@ import subscribeToSocketIo from "../api/subscribe-to-socket-io";
 const port = process.env.PORT || 3000;
 const client = openSocket(`http://127.0.0.1:${port}`);
 
-class App extends Component {
+class AppClass extends Component {
   constructor() {
     super();
     this.state = {
@@ -89,4 +89,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default AppClass;
