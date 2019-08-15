@@ -1,23 +1,17 @@
 import React from "react";
-import Container from "./Container.jsx";
-import CTX from "../store/CTX";
 
-const App = () => {
-  console.log("rendered app");
-  return (
-    <CTX.Consumer>
-      {
-        (value) => {
-          return (
-            <div className="App">
-              <Container grid={value.grid} players={value.players} player={value.player}/>
-            </div>
-          )
-        }
-      }
-    </CTX.Consumer>
-    
-  );
-}
+import reducer from "../store/reducer";
+console.log({reducer});
+import initialState from "../static/initial-state.json";
+console.log({initialState});
+
+import Container from "./Container.jsx";
+import Store from "./Store.jsx";
+
+const App = () => (
+  <Store initialState={initialState} reducer={reducer}>
+    <Container/>
+  </Store>
+);
 
 export default App;

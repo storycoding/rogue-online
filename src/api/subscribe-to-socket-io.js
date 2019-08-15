@@ -1,4 +1,9 @@
-const subscribeToSocketIo = (client, initialState, dispatch) => {  // dispatch must come from store
+import openSocket from 'socket.io-client';
+
+const port = process.env.PORT || 3000;
+const client = openSocket(`http://127.0.0.1:${port}`);
+
+const subscribeToSocketIo = (initialState, dispatch) => {  // dispatch must come from store
   client.on('connect', () => {
     console.log(`connected to the server websocket as ${client.id}`);
 
@@ -26,6 +31,8 @@ const subscribeToSocketIo = (client, initialState, dispatch) => {  // dispatch m
   client.on('disconnect', () => {
   console.log("disconnected from the server websocket");
   });
+
+  return client;
 }
 
 export default subscribeToSocketIo;

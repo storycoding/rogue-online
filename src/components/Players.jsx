@@ -1,8 +1,12 @@
 import React from "react";
+import { useStateValue } from "./Store.jsx";
 
-const Players = (props) => {
-  return Object.keys(props.players).map( id => {
-    const player = props.players[id];
+const Players = () => {
+  const [{players}, dispatch] = useStateValue();
+  console.log({players});
+
+  return Object.keys(players).map( id => {
+    const player = players[id];
 
     const playerStyle = {
       gridColumn: `${player.location.c+1}`,

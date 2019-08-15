@@ -1,37 +1,23 @@
 import React from "react";
 
-// Events
-import inputKeys from "../static/input-keys";
-import mapTouchToKey from "../events/mapTouchToKey";
-
+import { useStateValue } from './Store.jsx';
+console.log({useStateValue});
 // Components
 import Blocks from "./Blocks.jsx";
 import Players from "./Players.jsx";
 
-// Store
-import CTX from "../store/CTX";
+const Container = () => {
+  const [{grid}, dispatch] = useStateValue();
+  console.log({grid});
 
-const Container = (props) => {
-  console.log("rendered container");
-  console.log("container.props = ", props);
-
-  const { player, players, grid } = props;
   React.useEffect( () => {
     document.addEventListener("keydown", keyPress);
     document.addEventListener("click", handleClick);
-   
-    /* NEEDS STORE DISPATCH TO WORK
-    if ( player && player.id && players[player.id] && !player.div ) {
-      const div = document.getElementById(player.id);
-      console.log({div});
-      // dispatch div:div to Store state
-      // for now just update the whole gameState, then split actions
-    }
-    */
 
     // for unsubscribing
     return () => {
-      console.log("component is about to unmount");
+      document.removeEventListener("keydown", keyPress);
+      document.removeEventListener("click", handleClick);
     }
   });
   
@@ -50,24 +36,18 @@ const Container = (props) => {
   };
 
   return (
-    <CTX.Consumer>
-      {
-        value => (
-          <div id="container" style={containerStyle} tabIndex="0">
-            <Players players={value.players}/>
-            <Blocks grid={value.grid}/>
-          </div>
-        )
-      }
-    </CTX.Consumer>
+    <div id="container" style={containerStyle} tabIndex="0">
+      <Players/>
+      <Blocks grid={grid}/>
+    </div>
   );
 };
 
 export default Container;
 
+// EVENTS
+import inputKeys from "../static/input-keys";
 
-
-// events
 const keyPress = ({key}) => {
   console.log({key});
   if (inputKeys.includes(key)) {
