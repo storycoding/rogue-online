@@ -5,7 +5,7 @@ let gameState = require('../static/new-game-state');
 const findNextPosition = require('../events/find-next-position');
 const checkCollision = require('../events/check-collision');
 
-const sprites = ["ogre", "behemoth", "lizzard", "frog", "llama", "strongman"];
+const sprites = ["ogre", "behemoth", "lizzard", "frog", "llama"];
 let spriteIndex = -1;
 
 const setSockets = server => {
@@ -30,10 +30,13 @@ const setSockets = server => {
       }
 
       socket.on('request-game-state', () => {
-        socket.emit('game-state', gameState);
+        socket.emit('game-state', {
+          ...gameState,
+          player: gameState.players[socket.id],
+        });
       });
       
-      socket.on('key-input', inputKey => {
+      socket.on('request-movement-to-direction', inputKey => {
         let newPosition = findNextPosition(inputKey, gameState.players[socket.id].location);
         const collides = checkCollision(newPosition, gameState.grid);
         if(!collides) {

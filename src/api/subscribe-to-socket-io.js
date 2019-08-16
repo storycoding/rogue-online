@@ -1,31 +1,15 @@
-import openSocket from 'socket.io-client';
-
-const port = process.env.PORT || 3000;
-const client = openSocket(`http://127.0.0.1:${port}`);
-
-const subscribeToSocketIo = (initialState, dispatch) => {  // dispatch must come from store
+const subscribeToSocketIo = (client, dispatch) => {
   client.on('connect', () => {
     console.log(`connected to the server websocket as ${client.id}`);
-
-    const newState = {
-      initialState,
-      player : {
-        ...initialState.player,
-        id: client.id,
-      }
-    };
-
-    dispatch(newState);
+    
     client.emit("request-game-state");
   });
 
-  client.on("game-state", (data) => {
-    const newState = {
-      ...initialState,
-      data,
-    };
-
-    dispatch(newState);
+  client.on("game-state", (gameState) => {
+    dispatch({
+      type: "UPDATE_GAME_STATE",
+      payload: gameState,
+    });
   });
 
   client.on('disconnect', () => {

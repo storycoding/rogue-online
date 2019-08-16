@@ -1,14 +1,21 @@
 import React from "react";
+import openSocket from 'socket.io-client';
 
-import reducer from "../store/reducer";
-console.log({reducer});
-import initialState from "../static/initial-state.json";
-console.log({initialState});
-
+// components
 import Container from "./Container.jsx";
 import Store from "./Store.jsx";
 
-const App = () => (
+// store
+import reducer from "../store/reducer";
+
+// create a socket connection
+const port = process.env.PORT || 3000;
+const client = openSocket(`http://127.0.0.1:${port}`);
+
+// adds clients to the store to allow dispatching of socket events
+const initialState = { client };
+
+const App = React.memo(() => 
   <Store initialState={initialState} reducer={reducer}>
     <Container/>
   </Store>

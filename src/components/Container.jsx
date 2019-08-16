@@ -1,66 +1,50 @@
 import React from "react";
 
-import { useStateValue } from './Store.jsx';
-console.log({useStateValue});
 // Components
+import { useStateValue } from './Store.jsx';
 import Blocks from "./Blocks.jsx";
 import Players from "./Players.jsx";
+import LoadingScreen from "./LoadingScreen.jsx";
 
-const Container = () => {
-  const [{grid}, dispatch] = useStateValue();
-  console.log({grid});
+// events
+import inputKeys from "../static/input-keys";
+import styleContainer from "../events/style-container";
+
+// socket connection
+import subscribeToSocketIo from "../api/subscribe-to-socket-io.js";
+
+const Container = React.memo( () => {
+  const [state, dispatch] = useStateValue();
+  const { grid } = state;
+  
+  const keyPress = ({key}) => {
+    if (inputKeys.includes(key)) {
+      dispatch({type: "REQUEST_MOVEMENT_TO_DIRECTION", payload: key});
+    }
+  }
 
   React.useEffect( () => {
+    subscribeToSocketIo(state.client, dispatch);
     document.addEventListener("keydown", keyPress);
-    document.addEventListener("click", handleClick);
 
-    // for unsubscribing
     return () => {
       document.removeEventListener("keydown", keyPress);
-      document.removeEventListener("click", handleClick);
     }
-  });
+  }, []); // [] is a hack to useEffect only once
   
   if(!grid) {
-    console.log("no grid");
-    return <div className="loading">Loading...</div>
+    setTimeout(() =>  {
+      dispatch({type: "REQUEST_GAME_STATE"});
+    }, 1000);
+    return <LoadingScreen/>
   }
-  const height = grid.length;
-  const width = grid[0].length;
-
-  const containerStyle = {     
-    height: `${height}00px`,
-    width: `${width}00px`,
-    gridTemplateRows: `repeat(${height}, ${100/height}%)`,
-    gridTemplateColumns: `repeat(${width}, ${100/width}%)`,
-  };
 
   return (
-    <div id="container" style={containerStyle} tabIndex="0">
+    <div id="container" style={styleContainer(grid)} tabIndex="0">
       <Players/>
       <Blocks grid={grid}/>
     </div>
   );
-};
+});
 
 export default Container;
-
-// EVENTS
-import inputKeys from "../static/input-keys";
-
-const keyPress = ({key}) => {
-  console.log({key});
-  if (inputKeys.includes(key)) {
-    // dispatch action to make websocket request
-      // client.emit("key-input", key);
-  }
-}
-
-
-const handleClick = (clickEvent) => {
-  console.log({clickEvent});
-  /* needs playerDiv ( from store ) to work
-  const key = mapTouchToKey(clickEvent, playerDiv);
-  return key ? keyPress({key}) : null;
-  */
-}
