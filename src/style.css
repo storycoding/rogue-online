@@ -87,20 +87,14 @@ body {
   background-size: 300%;
 }
 
-@keyframes strongman-walk {
-  100% { background-position: -300px; }
-}
-
-.strongman {
-  background: url(./assets/strongman.png);
-  animation: ogre-walk 0.5s steps(3) infinite;
-  background-size: 400%;
-}
-
 #container {
   width: 640px;
   height: 640px;
   position: relative;
   display: grid;
   zoom: 0.5;
+}
+
+#loading-screen {
+  color: white;
 }
