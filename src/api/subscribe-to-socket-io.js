@@ -5,31 +5,31 @@ const subscribeToSocketIo = (client, dispatch) => {
     client.emit("request-game-state");
   });
 
-  client.on("game-grid", (gameState) => {
+  client.on("game-grid", payload => {
     dispatch({
       type: "UPDATE_GAME_GRID",
-      payload: gameState,
+      payload,
     });
   });
 
-  client.on("game-players", (gameState) => {
+  client.on("game-players", payload => {
     dispatch({
       type: "UPDATE_GAME_PLAYERS",
-      payload: gameState,
+      payload,
     });
   });
 
-  client.on("game-current-player", (gameState) => {
+  client.on("game-current-player", payload => {
     dispatch({
       type: "UPDATE_GAME_CURRENT_PLAYER",
-      payload: gameState,
+      payload,
     });
   });
 
-  client.on("game-state", (gameState) => {
+  client.on("game-state", payload => {
     dispatch({
       type: "UPDATE_GAME_STATE",
-      payload: gameState,
+      payload,
     });
   });
 

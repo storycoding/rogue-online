@@ -21,13 +21,13 @@ const reducer = (state, action) => {
       return state;
 
     case 'UPDATE_GAME_GRID' :
-      return { ...state, ...action.payload};
+      return { ...state, grid: action.payload};
 
     case 'UPDATE_GAME_PLAYERS' :
-      return { ...state, ...action.payload};
+      return { ...state, players: action.payload};
     
     case 'UPDATE_GAME_CURRENT_PLAYER' :
-      return { ...state, ...action.payload};
+      return { ...state, player: action.payload};
     
     case 'UPDATE_GAME_STATE' :
       return { ...state, ...action.payload};

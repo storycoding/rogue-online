@@ -2,7 +2,13 @@ const socketIo = require('socket.io')
 // initial game state, should come from dynamoDB
 let gameState = require('../static/new-game-state');
 
-const { checkCollision, findNextPosition, generateSpriteSequence } = require('../events');
+const {
+  checkCollision,
+  generateSpriteSequence,
+  findPlayerLocation,
+  findNextLocation,
+} = require('../events');
+
 const spriteSequence = generateSpriteSequence();
 
 const setSockets = server => {
@@ -11,15 +17,14 @@ const setSockets = server => {
     io.on('connection', socket => {
       console.log(`user:${socket.id} connected to the server`);
 
-      // starting location
       gameState.players[socket.id] = {
-        location: {
-          "r":5,
-          "c":4,
-        },
+        location: findPlayerLocation(gameState.players, socket.id),
         sprite: spriteSequence.next().value,
         id: socket.id,
       }
+
+      const player = { ...gameState.players[socket.id] }
+      delete player.location; // client doesn't need this
 
       socket.on('request-game-grid', () => {
         socket.emit('game-grid', () => { gameState.grid });
@@ -32,7 +37,7 @@ const setSockets = server => {
       socket.on('request-game-current-player', () => {
         socket.emit('game-current-player', () => (
           {
-          player: gameState.players[socket.id],
+          player,
           })
         );
       });
@@ -40,16 +45,16 @@ const setSockets = server => {
       socket.on('request-game-state', () => {
         socket.emit('game-state', {
           ...gameState,
-          player: gameState.players[socket.id],
+          player,
         });
       });
       
-      socket.on('request-movement-to-direction', inputKey => {
-        let newPosition = findNextPosition(inputKey, gameState.players[socket.id].location);
-        const collides = checkCollision(newPosition, gameState.grid);
+      socket.on('request-movement-to-direction', direction => {
+        let nextLocation = findNextLocation(direction, gameState.players[socket.id].location);
+        const collides = checkCollision(nextLocation, gameState.grid);
         if(!collides) {
-          gameState.players[socket.id].location = newPosition;
-          io.emit('game-state', gameState);
+          gameState.players[socket.id].location = nextLocation;
+          io.emit('game-players', gameState.players);
         }
       });
 

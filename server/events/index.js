@@ -1,9 +1,11 @@
 const checkCollision = require("./check-collision");
-const findNextPosition = require("./find-next-position");
+const findNextLocation = require("./find-next-location");
 const generateSpriteSequence = require("./generate-sprite-sequence");
+const findPlayerLocation = require("./find-player-location");
 
 module.exports = {
   checkCollision,
-  findNextPosition,
+  findNextLocation,
   generateSpriteSequence,
+  findPlayerLocation,
 }
