@@ -20,6 +20,15 @@ const reducer = (state, action) => {
       state.client.emit("request-movement-to-direction", action.payload);
       return state;
 
+    case 'UPDATE_GAME_GRID' :
+      return { ...state, ...action.payload};
+
+    case 'UPDATE_GAME_PLAYERS' :
+      return { ...state, ...action.payload};
+    
+    case 'UPDATE_GAME_CURRENT_PLAYER' :
+      return { ...state, ...action.payload};
+    
     case 'UPDATE_GAME_STATE' :
       return { ...state, ...action.payload};
 
