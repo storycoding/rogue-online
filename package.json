@@ -20,6 +20,7 @@
     "babel-preset-es2015": "^6.24.1",
     "css-loader": "^3.0.0",
     "file-loader": "^4.0.0",
+    "nodemon": "^1.19.1",
     "regenerator-runtime": "^0.13.2",
     "style-loader": "^0.23.1",
     "webpack": "^4.33.0",
@@ -31,6 +32,7 @@
     "webpack:hot": "webpack-dev-server --hotOnly",
     "express:hot": "export DEV=true && nodemon server",
     "build": "webpack",
-    "start": "node server"
+    "start": "node server",
+    "ngrok": "./ngrok http --host-header=rewrite 8080"
   }
 }
