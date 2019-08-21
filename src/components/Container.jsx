@@ -8,7 +8,7 @@ import LoadingScreen from "./LoadingScreen.jsx";
 
 // events
 import inputKeys from "../static/input-keys";
-import styleContainer from "../events/style-container";
+import { styleContainer, mapTouchToKey } from "../events";
 
 // socket connection
 import subscribeToSocketIo from "../api/subscribe-to-socket-io.js";
@@ -23,12 +23,18 @@ const Container = React.memo( () => {
     }
   }
 
+  const handleClick = (clickEvent) => {
+    const key = mapTouchToKey(clickEvent);
+    return key ? keyPress({key}) : null;
+  }
+
   React.useEffect( () => {
     subscribeToSocketIo(state.client, dispatch);
     document.addEventListener("keydown", keyPress);
-
+    document.addEventListener("click", handleClick);
     return () => {
       document.removeEventListener("keydown", keyPress);
+      document.removeEventListener("click", handleClick);
     }
   }, []); // [] is a hack to useEffect only once
   
