@@ -1,6 +1,6 @@
 import React from "react";
 
-const Blocks = (props) => {
+const Blocks = React.memo( (props) => {
   return props.grid.map( (row, rIndex) => {
     return row.map( (cell, cIndex) => (
       <Block
@@ -12,11 +12,11 @@ const Blocks = (props) => {
     )
     );
   })
-}
+});
 
 const Block = (props) => {
   const classNames = `item ${props.tile}`
   return <div className={classNames}></div>
-}
+};
 
 export default Blocks;
