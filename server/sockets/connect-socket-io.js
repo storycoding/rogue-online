@@ -2,21 +2,13 @@ const socketIo = require('socket.io')
 // initial game state, should come from dynamoDB
 let gameState = require('../static/new-game-state');
 
-const findNextPosition = require('../events/find-next-position');
-const checkCollision = require('../events/check-collision');
-
-const sprites = ["ogre", "behemoth", "lizzard", "frog", "llama"];
-let spriteIndex = -1;
+const { checkCollision, findNextPosition, generateSpriteSequence } = require('../events');
+const spriteSequence = generateSpriteSequence();
 
 const setSockets = server => {
   const io = socketIo(server);
   
     io.on('connection', socket => {
-      spriteIndex ++;
-      if(spriteIndex >= sprites.length) {
-        spriteIndex = 0;
-      }
-
       console.log(`user:${socket.id} connected to the server`);
 
       // starting location
@@ -25,7 +17,7 @@ const setSockets = server => {
           "r":5,
           "c":4,
         },
-        sprite: sprites[spriteIndex],
+        sprite: spriteSequence.next().value,
         id: socket.id,
       }
 
