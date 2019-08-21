@@ -21,6 +21,22 @@ const setSockets = server => {
         id: socket.id,
       }
 
+      socket.on('request-game-grid', () => {
+        socket.emit('game-grid', () => { gameState.grid });
+      });
+
+      socket.on('request-game-players', () => {
+        socket.emit('game-players', () => { gameState.players });
+      });
+
+      socket.on('request-game-current-player', () => {
+        socket.emit('game-current-player', () => (
+          {
+          player: gameState.players[socket.id],
+          })
+        );
+      });
+
       socket.on('request-game-state', () => {
         socket.emit('game-state', {
           ...gameState,
@@ -33,9 +49,8 @@ const setSockets = server => {
         const collides = checkCollision(newPosition, gameState.grid);
         if(!collides) {
           gameState.players[socket.id].location = newPosition;
+          io.emit('game-state', gameState);
         }
-        // send state to all users
-        io.emit('game-state', gameState);
       });
 
       socket.on('disconnect', () => {
