@@ -1,6 +1,7 @@
 const socketIo = require('socket.io')
 // initial game state, should come from dynamoDB
 let gameState = require('../static/new-game-state');
+const cluster = require('cluster');
 
 const {
   checkCollision,
@@ -15,15 +16,19 @@ const setSockets = server => {
   const io = socketIo(server);
   
     io.on('connection', socket => {
-      console.log(`user:${socket.id} connected to the server`);
+      
+      // only accessible when the connection is established
+      const playerId = cluster.worker.id;
 
-      gameState.players[socket.id] = {
-        location: findPlayerLocation(gameState.players, socket.id),
+      console.log(`player${playerId} connected to the server`);
+
+      gameState.players[playerId] = {
+        location: findPlayerLocation(gameState.players, playerId),
         sprite: spriteSequence.next().value,
-        id: socket.id,
+        id: playerId,
       }
 
-      const player = { ...gameState.players[socket.id] }
+      const player = { ...gameState.players[playerId] }
       delete player.location; // client doesn't need this
 
       socket.on('request-game-grid', () => {
@@ -50,17 +55,18 @@ const setSockets = server => {
       });
       
       socket.on('request-movement-to-direction', direction => {
-        let nextLocation = findNextLocation(direction, gameState.players[socket.id].location);
+        
+        let nextLocation = findNextLocation(direction, gameState.players[playerId].location);
         const collides = checkCollision(nextLocation, gameState.grid);
         if(!collides) {
-          gameState.players[socket.id].location = nextLocation;
+          gameState.players[playerId].location = nextLocation;
           io.emit('game-players', gameState.players);
         }
       });
 
       socket.on('disconnect', () => {
-        console.log(`user:${socket.id} disconnected from the server`);
-        delete gameState.players[socket.id];
+        console.log(`player${playerId} disconnected from the server`);
+        delete gameState.players[playerId];
         io.emit('game-state', gameState);
       });
     });

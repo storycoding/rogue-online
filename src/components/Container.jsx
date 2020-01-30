@@ -24,8 +24,12 @@ const Container = React.memo( () => {
   }
 
   const handleClick = (clickEvent) => {
-    const key = mapTouchToKey(clickEvent);
-    return key ? keyPress({key}) : null;
+    const playerId = dispatch(
+      {
+        type: "REQUEST_TOUCH_MOVEMENT_TO_DIRECTION",
+        payload: clickEvent,
+      }
+    );
   }
 
   React.useEffect( () => {
@@ -36,7 +40,7 @@ const Container = React.memo( () => {
       document.removeEventListener("keydown", keyPress);
       document.removeEventListener("click", handleClick);
     }
-  }, []); // [] is a hack to useEffect only once
+  }, []);
   
   if(!grid) {
     setTimeout(() =>  {

@@ -1,7 +1,14 @@
 const subscribeToSocketIo = (client, dispatch) => {
   client.on('connect', () => {
-    console.log(`connected to the server websocket as ${client.id}`);
     client.emit("request-game-state");
+  });
+
+  client.on("game-state", payload => {
+    console.log(`connected to the server as player${payload.player.id}`);
+    dispatch({
+      type: "UPDATE_GAME_STATE",
+      payload,
+    });
   });
 
   client.on("game-grid", payload => {
@@ -21,13 +28,6 @@ const subscribeToSocketIo = (client, dispatch) => {
   client.on("game-current-player", payload => {
     dispatch({
       type: "UPDATE_GAME_CURRENT_PLAYER",
-      payload,
-    });
-  });
-
-  client.on("game-state", payload => {
-    dispatch({
-      type: "UPDATE_GAME_STATE",
       payload,
     });
   });
