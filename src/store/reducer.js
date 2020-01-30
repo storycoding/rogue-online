@@ -1,3 +1,5 @@
+import mapTouchToKey from '../events/map-touch-to-key.js';
+
 const reducer = (state, action) => {
   switch(action.type) {
     case 'REQUEST_GAME_STATE' :
@@ -18,6 +20,11 @@ const reducer = (state, action) => {
 
     case 'REQUEST_MOVEMENT_TO_DIRECTION' :
       state.client.emit("request-movement-to-direction", action.payload);
+      return state;
+
+    case 'REQUEST_TOUCH_MOVEMENT_TO_DIRECTION' :
+      const direction = mapTouchToKey(state.player.id, action.payload);
+      state.client.emit("request-movement-to-direction", direction);
       return state;
 
     case 'UPDATE_GAME_GRID' :

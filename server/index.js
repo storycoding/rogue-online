@@ -2,11 +2,30 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const http = require('http');
 const connectSocketIo = require('./sockets/connect-socket-io');
+const sticky = require('sticky-session');
+const cluster = require('cluster');
 
 const port = process.env.PORT || 3000;
 
 
 const app = express();
+
+app.get('/whoami', (req, res) => {
+  const workerInfo = JSON.stringify(
+    {
+      'id' : cluster.worker.id,
+      'state' : cluster.worker.state,
+      'connected' : cluster.worker.isConnected()
+    },
+    null,
+    2
+  )
+
+  console.log(`user has requested his info:`);
+  console.log(workerInfo);
+  res.send(workerInfo);
+})
+
 const server = http.createServer(app);
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -27,4 +46,8 @@ if(process.env.DEV === "true") {
   `;
 }
 
-server.listen(port, () => console.log(serverStartupMessage));
+if (!sticky.listen(server, port)) {
+  server.once('listening', () => {
+    console.log(serverStartupMessage);
+  });
+}
