@@ -24,7 +24,11 @@ app.get('/whoami', (req, res) => {
   console.log(`user has requested his info:`);
   console.log(workerInfo);
   res.send(workerInfo);
-})
+});
+
+app.get('/health-check', (req, res) => {
+  res.send('ok');
+});
 
 const server = http.createServer(app);
 
